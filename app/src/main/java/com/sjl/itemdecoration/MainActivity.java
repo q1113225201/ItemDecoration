@@ -13,6 +13,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.btn_system).setOnClickListener(this);
+        findViewById(R.id.btn_grid_view).setOnClickListener(this);
     }
 
     @Override
@@ -20,6 +21,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_system:
                 startActivity(new Intent(this,SystemItemDecorationActivity.class));
+                break;
+            case R.id.btn_grid_view:
+                startActivity(new Intent(this,GridItemDecorationActivity.class));
                 break;
         }
     }
