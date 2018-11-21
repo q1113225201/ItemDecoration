@@ -13,16 +13,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.btn_system).setOnClickListener(this);
-        findViewById(R.id.btn_grid_view).setOnClickListener(this);
+        findViewById(R.id.btn_grid).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_system:
-                startActivity(new Intent(this,SystemItemDecorationActivity.class));
+                startActivity(new Intent(this,LinearItemDecorationActivity.class));
                 break;
-            case R.id.btn_grid_view:
+            case R.id.btn_grid:
                 startActivity(new Intent(this,GridItemDecorationActivity.class));
                 break;
         }

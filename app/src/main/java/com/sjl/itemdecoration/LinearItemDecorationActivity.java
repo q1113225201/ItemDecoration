@@ -10,14 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import com.sjl.itemdecoration.adapter.StringAdapter;
 import com.sjl.itemdecoration.util.Util;
 
-import java.util.List;
-
-public class SystemItemDecorationActivity extends Activity {
+public class LinearItemDecorationActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_system_item_decoration);
+        setContentView(R.layout.activity_linear_item_decoration);
 
         initView();
     }

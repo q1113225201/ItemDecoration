@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="系统ItemDecoration" />
     <Button
-        android:id="@+id/btn_grid_view"
+        android:id="@+id/btn_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="网格ItemDecoration" />
