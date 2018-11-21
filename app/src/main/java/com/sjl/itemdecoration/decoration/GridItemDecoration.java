@@ -23,7 +23,7 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mHorizontalDivider;
 
     private Rect mBounds = new Rect();
-    private boolean hasBorder = true;
+    private boolean hasBorder = false;
 
     public GridItemDecoration(Context context) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
@@ -90,20 +90,6 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * 第一行
-     */
-    private boolean isFirstRow(int position, int spanCount) {
-        return position < spanCount;
-    }
-
-    /**
-     * 最后一行
-     */
-    private boolean isLastRow(int position, int childCount, int spanCount) {
-        return position >= childCount - spanCount;
-    }
-
-    /**
      * 获取列数
      */
     private int getSpanCount(RecyclerView parent) {
@@ -121,8 +107,8 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
 //        super.onDraw(c, parent, state);
 
-//        drawVertical(c, parent);
-//        drawHorizontal(c, parent);
+        drawVertical(c, parent);
+        drawHorizontal(c, parent);
     }
 
     private void drawVertical(Canvas canvas, RecyclerView parent) {
@@ -138,23 +124,43 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
             left = 0;
             right = parent.getWidth();
         }
+        int spanCount = getSpanCount(parent);
+        int position;
 
-        final int childCount = parent.getChildCount();
+
+        int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
-            final View child = parent.getChildAt(i);
+            View child = parent.getChildAt(i);
             parent.getDecoratedBoundsWithMargins(child, mBounds);
-            final int bottom = mBounds.bottom + Math.round(child.getTranslationY());
-            final int top = bottom - mVerticalDivider.getIntrinsicHeight();
+            int bottom = mBounds.bottom + Math.round(child.getTranslationY());
+            int top = bottom - mVerticalDivider.getIntrinsicHeight();
+            position = parent.getChildAdapterPosition(child);
+            if (hasBorder) {
+                //有边框
+                right = isLastItem(position, parent) ? mBounds.right : right;
+//                top = isFirstRow(position, spanCount) ? 0 : top;
+//                bottom = isFirstRow(position,spanCount)?mVerticalDivider.getIntrinsicHeight():bottom;
+            }
             mVerticalDivider.setBounds(left, top, right, bottom);
             mVerticalDivider.draw(canvas);
+            if (hasBorder && isFirstRow(position, spanCount)) {
+                top = isFirstRow(position, spanCount) ? 0 : top;
+                bottom = isFirstRow(position, spanCount) ? mVerticalDivider.getIntrinsicHeight() : bottom;
+                mVerticalDivider.setBounds(left, top, right, bottom);
+                mVerticalDivider.draw(canvas);
+            }
         }
         canvas.restore();
     }
 
+    private boolean isLastItem(int position, RecyclerView parent) {
+        return position + 1 == parent.getAdapter().getItemCount();
+    }
+
     private void drawHorizontal(Canvas canvas, RecyclerView parent) {
         canvas.save();
-        final int top;
-        final int bottom;
+        int top;
+        int bottom;
         //noinspection AndroidLintNewApi - NewApi lint fails to handle overrides.
         if (parent.getClipToPadding()) {
             top = parent.getPaddingTop();
@@ -165,18 +171,58 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
             top = 0;
             bottom = parent.getHeight();
         }
-        final int childCount = parent.getChildCount();
+        int spanCount = getSpanCount(parent);
+        int position;
+        int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             parent.getLayoutManager().getDecoratedBoundsWithMargins(child, mBounds);
-            int position = parent.getChildAdapterPosition(child);
-            final int right = mBounds.right + Math.round(child.getTranslationX());
-//            final int right = parent.getLayoutManager().getDecoratedRight(child);
-            final int left = right - mHorizontalDivider.getIntrinsicWidth();
+            position = parent.getChildAdapterPosition(child);
+            int right = mBounds.right + Math.round(child.getTranslationX());
+            int left = right - mHorizontalDivider.getIntrinsicWidth();
+            if (hasBorder) {
+                bottom = ((position % spanCount) < (parent.getAdapter().getItemCount() % spanCount)) ? mBounds.bottom : bottom;
+            } else {
+                bottom = ((position % spanCount) < (parent.getAdapter().getItemCount() % spanCount)) ? (mBounds.bottom - mVerticalDivider.getIntrinsicHeight()) : bottom;
+            }
             mHorizontalDivider.setBounds(left, top, right, bottom);
             mHorizontalDivider.draw(canvas);
+            if (hasBorder) {
+                left = isFirstColumn(position, spanCount) ? 0 : left;
+                right = isFirstColumn(position, spanCount) ? mHorizontalDivider.getIntrinsicWidth() : right;
+                mVerticalDivider.setBounds(left, top, right, bottom);
+                mVerticalDivider.draw(canvas);
+            }
         }
         canvas.restore();
+    }
+
+    /**
+     * 第一行
+     */
+    private boolean isFirstRow(int position, int spanCount) {
+        return position < spanCount;
+    }
+
+    /**
+     * 最后一行
+     */
+    private boolean isLastRow(int position, int childCount, int spanCount) {
+        return position >= childCount - spanCount;
+    }
+
+    /**
+     * 第一列
+     */
+    private boolean isFirstColumn(int position, int spanCount) {
+        return position % spanCount == 0;
+    }
+
+    /**
+     * 最后一列
+     */
+    private boolean isLastColumn(int position, int spanCount) {
+        return (position + 1) % spanCount == 0;
     }
 
     public void setVerticalDivider(Drawable verticalDivider) {
@@ -185,5 +231,9 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
 
     public void setHorizontalDivider(Drawable horizontalDivider) {
         this.mHorizontalDivider = horizontalDivider;
+    }
+
+    public void setHasBorder(boolean hasBorder) {
+        this.hasBorder = hasBorder;
     }
 }

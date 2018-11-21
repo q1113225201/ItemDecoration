@@ -24,14 +24,22 @@ public class GridItemDecorationActivity extends Activity {
 
     private void initView() {
         StringAdapter adapter = new StringAdapter(Util.buildList());
-        RecyclerView recyclerViewGrid = findViewById(R.id.recycler_view_grid);
-        recyclerViewGrid.setAdapter(adapter);
-        recyclerViewGrid.setLayoutManager(new GridLayoutManager(this, 3));
-        GridItemDecoration gridItemDecoration = new GridItemDecoration(this);
-        gridItemDecoration.setVerticalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
-        gridItemDecoration.setHorizontalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
+        RecyclerView recyclerViewGridBorder = findViewById(R.id.recycler_view_grid_border);
+        recyclerViewGridBorder.setAdapter(adapter);
+        recyclerViewGridBorder.setLayoutManager(new GridLayoutManager(this, 3));
+        GridItemDecoration gridItemDecorationBorder = new GridItemDecoration(this);
+        gridItemDecorationBorder.setHasBorder(true);
+        gridItemDecorationBorder.setVerticalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
+        gridItemDecorationBorder.setHorizontalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
+        recyclerViewGridBorder.addItemDecoration(gridItemDecorationBorder);
 
-        GridDividerItemDecoration gridDividerItemDecoration = new GridDividerItemDecoration(200, Color.BLACK);
-        recyclerViewGrid.addItemDecoration(gridItemDecoration);
+        RecyclerView recyclerViewGridNoBorder = findViewById(R.id.recycler_view_grid_no_border);
+        recyclerViewGridNoBorder.setAdapter(adapter);
+        recyclerViewGridNoBorder.setLayoutManager(new GridLayoutManager(this, 3));
+        GridItemDecoration gridItemDecorationNoBorder = new GridItemDecoration(this);
+        gridItemDecorationNoBorder.setHasBorder(false);
+        gridItemDecorationNoBorder.setVerticalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
+        gridItemDecorationNoBorder.setHorizontalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
+        recyclerViewGridNoBorder.addItemDecoration(gridItemDecorationNoBorder);
     }
 }
