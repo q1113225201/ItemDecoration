@@ -12,7 +12,7 @@ import java.util.List;
 public class Util {
     public static List<String> buildList(){
         List<String> list = new ArrayList<>();
-        for (int i=0;i<10;i++){
+        for (int i=0;i<9;i++){
             list.add("item"+i);
         }
         return list;

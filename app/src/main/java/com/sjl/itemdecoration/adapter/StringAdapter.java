@@ -18,16 +18,18 @@ import java.util.List;
  * @date 2018/11/20
  */
 public class StringAdapter extends RecyclerView.Adapter<StringAdapter.ViewHolder> {
+    private int res;
     private List<String> list;
 
-    public StringAdapter(List<String> list) {
+    public StringAdapter(int res,List<String> list) {
+        this.res = res;
         this.list = list;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_string, viewGroup, false));
+        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(res, viewGroup, false));
     }
 
     @Override

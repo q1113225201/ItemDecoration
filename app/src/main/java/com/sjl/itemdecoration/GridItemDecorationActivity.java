@@ -23,23 +23,35 @@ public class GridItemDecorationActivity extends Activity {
     }
 
     private void initView() {
-        StringAdapter adapter = new StringAdapter(Util.buildList());
-        RecyclerView recyclerViewGridBorder = findViewById(R.id.recycler_view_grid_border);
-        recyclerViewGridBorder.setAdapter(adapter);
-        recyclerViewGridBorder.setLayoutManager(new GridLayoutManager(this, 3));
-        GridItemDecoration gridItemDecorationBorder = new GridItemDecoration(this);
-        gridItemDecorationBorder.setHasBorder(true);
-        gridItemDecorationBorder.setVerticalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
-        gridItemDecorationBorder.setHorizontalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
-        recyclerViewGridBorder.addItemDecoration(gridItemDecorationBorder);
+        int spanCount = 4;
+        StringAdapter adapterW = new StringAdapter(R.layout.item_string_w,Util.buildList());
+        RecyclerView recyclerViewGridBorderW = findViewById(R.id.recycler_view_grid_border_w);
+        recyclerViewGridBorderW.setAdapter(adapterW);
+        recyclerViewGridBorderW.setLayoutManager(new GridLayoutManager(this, spanCount));
+        recyclerViewGridBorderW.addItemDecoration(getItemDecoration(true));
 
-        RecyclerView recyclerViewGridNoBorder = findViewById(R.id.recycler_view_grid_no_border);
-        recyclerViewGridNoBorder.setAdapter(adapter);
-        recyclerViewGridNoBorder.setLayoutManager(new GridLayoutManager(this, 3));
+        RecyclerView recyclerViewGridNoBorderW = findViewById(R.id.recycler_view_grid_no_border_w);
+        recyclerViewGridNoBorderW.setAdapter(adapterW);
+        recyclerViewGridNoBorderW.setLayoutManager(new GridLayoutManager(this, spanCount));
+        recyclerViewGridNoBorderW.addItemDecoration(getItemDecoration(false));
+
+        StringAdapter adapterM = new StringAdapter(R.layout.item_string_m,Util.buildList());
+        RecyclerView recyclerViewGridBorderM = findViewById(R.id.recycler_view_grid_border_m);
+        recyclerViewGridBorderM.setAdapter(adapterM);
+        recyclerViewGridBorderM.setLayoutManager(new GridLayoutManager(this, spanCount));
+        recyclerViewGridBorderM.addItemDecoration(getItemDecoration(true));
+
+        RecyclerView recyclerViewGridNoBorderM = findViewById(R.id.recycler_view_grid_no_border_m);
+        recyclerViewGridNoBorderM.setAdapter(adapterM);
+        recyclerViewGridNoBorderM.setLayoutManager(new GridLayoutManager(this, spanCount));
+        recyclerViewGridNoBorderM.addItemDecoration(getItemDecoration(false));
+    }
+
+    public GridItemDecoration getItemDecoration(boolean hasBorder){
         GridItemDecoration gridItemDecorationNoBorder = new GridItemDecoration(this);
-        gridItemDecorationNoBorder.setHasBorder(false);
+        gridItemDecorationNoBorder.setHasBorder(hasBorder);
         gridItemDecorationNoBorder.setVerticalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
         gridItemDecorationNoBorder.setHorizontalDivider(ContextCompat.getDrawable(this, R.drawable.bg_black));
-        recyclerViewGridNoBorder.addItemDecoration(gridItemDecorationNoBorder);
+        return gridItemDecorationNoBorder;
     }
 }
