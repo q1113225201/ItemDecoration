@@ -21,13 +21,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_system:
-                startActivity(new Intent(this,LinearItemDecorationActivity.class));
+                startActivity(new Intent(this, LinearItemDecorationActivity.class));
                 break;
             case R.id.btn_grid:
-                startActivity(new Intent(this,GridItemDecorationActivity.class));
+                startActivity(new Intent(this, GridItemDecorationActivity.class));
                 break;
             case R.id.btn_group:
-                startActivity(new Intent(this,GridItemDecorationActivity.class));
+                startActivity(new Intent(this, GroupItemDecorationActivity.class));
                 break;
         }
     }

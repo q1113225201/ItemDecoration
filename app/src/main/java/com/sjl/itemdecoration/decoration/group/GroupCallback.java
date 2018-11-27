@@ -1,5 +1,7 @@
 package com.sjl.itemdecoration.decoration.group;
 
+import android.view.View;
+
 /**
  * GroupCallback
  *
@@ -8,4 +10,6 @@ package com.sjl.itemdecoration.decoration.group;
  */
 public interface GroupCallback {
     GroupBean getGroupBean(int position);
+
+    View getDividerView(int position);
 }
