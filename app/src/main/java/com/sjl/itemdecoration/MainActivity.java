@@ -14,6 +14,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         findViewById(R.id.btn_system).setOnClickListener(this);
         findViewById(R.id.btn_grid).setOnClickListener(this);
+        findViewById(R.id.btn_group).setOnClickListener(this);
     }
 
     @Override
@@ -23,6 +24,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 startActivity(new Intent(this,LinearItemDecorationActivity.class));
                 break;
             case R.id.btn_grid:
+                startActivity(new Intent(this,GridItemDecorationActivity.class));
+                break;
+            case R.id.btn_group:
                 startActivity(new Intent(this,GridItemDecorationActivity.class));
                 break;
         }

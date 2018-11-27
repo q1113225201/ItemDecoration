@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".LinearItemDecorationActivity" />
-        <activity android:name=".GridItemDecorationActivity"></activity>
+        <activity android:name=".GridItemDecorationActivity" />
+        <activity android:name=".GroupItemDecorationActivity"></activity>
     </application>
 
 </manifest>

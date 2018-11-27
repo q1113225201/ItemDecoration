@@ -1,14 +1,12 @@
 package com.sjl.itemdecoration;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.sjl.itemdecoration.adapter.StringAdapter;
-import com.sjl.itemdecoration.decoration.GridDividerItemDecoration;
 import com.sjl.itemdecoration.decoration.GridItemDecoration;
 import com.sjl.itemdecoration.util.Util;
 
