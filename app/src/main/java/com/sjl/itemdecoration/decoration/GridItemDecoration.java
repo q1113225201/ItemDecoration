@@ -79,11 +79,11 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
         int top;
         int bottom;
         if (hasBorder) {
-            //有边框
+            //有边框，最上面空分割线高度，最下面空分割线高度，其他都上下各分割线一半的高度
             top = isFirstRow(position, spanCount) ? dividerHeight : (dividerHeight / 2);
             bottom = isLastRow(position, itemCount, spanCount) ? dividerHeight : (dividerHeight / 2);
         } else {
-            //无边框
+            //无边框，最上面高度空0，最下面高度空0，其他上下各空分割线一半高度
             top = isFirstRow(position, spanCount) ? 0 : (dividerHeight / 2);
             bottom = isLastRow(position, itemCount, spanCount) ? 0 : (dividerHeight / 2);
         }
@@ -112,25 +112,34 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
         drawHorizontal(c, parent);
     }
 
+    /**
+     * 绘制水平分割线
+     */
     private void drawVertical(Canvas canvas, RecyclerView parent) {
         canvas.save();
+        //总item数
+        int itemCount = parent.getAdapter().getItemCount();
+        //列数
+        int spanCount = getSpanCount(parent);
+        //每个item宽度
+        int itemWidth = (parent.getWidth() - parent.getPaddingLeft() - parent.getPaddingRight()) / spanCount;
+        //分割线高度
+        int dividerHeight = mVerticalDivider.getIntrinsicHeight();
         int left;
         int right;
         int bottom;
         int top;
-        int itemCount = parent.getAdapter().getItemCount();
-        int spanCount = getSpanCount(parent);
-        int itemWidth = (parent.getWidth() - parent.getPaddingLeft() - parent.getPaddingRight()) / spanCount;
-        int dividerHeight = mVerticalDivider.getIntrinsicHeight();
         int position;
 
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
-            View child = parent.getChildAt(i);
-            position = parent.getChildAdapterPosition(child);
-            parent.getDecoratedBoundsWithMargins(child, mBounds);
+            View childView = parent.getChildAt(i);
+            position = parent.getChildAdapterPosition(childView);
+            parent.getDecoratedBoundsWithMargins(childView, mBounds);
+            //分割线左右坐标
             left = mBounds.left;
             right = left + itemWidth;
+            //每个item下边分割线上边沿（getItemOffsets时每个item多空了一个分割线高度的一半）
             top = mBounds.bottom - dividerHeight / 2;
             if (isLastRow(position, itemCount, spanCount)) {
                 //最后一行，有边界需要完整分割线高度，没边界减掉
@@ -156,43 +165,50 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
         canvas.restore();
     }
 
-    private boolean isLastItem(int position, int itemCount) {
-        return position + 1 == itemCount;
-    }
-
+    /**
+     * 绘制纵向分割线
+     */
     private void drawHorizontal(Canvas canvas, RecyclerView parent) {
         canvas.save();
+        //总item数
         int itemCount = parent.getAdapter().getItemCount();
+        //列数
         int spanCount = getSpanCount(parent);
-        int childCount = parent.getChildCount();
+        //每个item宽度
         int itemWidth = (parent.getWidth() - parent.getPaddingLeft() - parent.getPaddingRight()) / spanCount;
+        //分割线宽度
         int dividerWidth = mHorizontalDivider.getIntrinsicWidth();
+        //每个item中分割线占的宽度
         int itemDividerWidth = (spanCount + (hasBorder ? 1 : -1)) * dividerWidth / spanCount;
-        int position;
-
 
         int top;
         int bottom;
         int right;
         int left;
+        int position;
 
+        int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             parent.getLayoutManager().getDecoratedBoundsWithMargins(child, mBounds);
             position = parent.getChildAdapterPosition(child);
+            //分割线上下坐标
             top = mBounds.top;
             bottom = mBounds.bottom;
             if (!hasBorder) {
+                //没有边界时
                 if (position + spanCount == itemCount) {
                     //最后一个item上面那个
                     bottom += mVerticalDivider.getIntrinsicHeight() / 2;
                 } else if ((itemCount % spanCount != 0) && (itemCount % spanCount < position % spanCount) && (position > itemCount - spanCount)) {
+                    //item不是整行数时，倒数第二行最后几个的下边界线需要减去
                     bottom -= mVerticalDivider.getIntrinsicHeight() / 2;
                 }
             }
             //行中位置
             int indexHorizontal = position % spanCount;
             if (hasBorder) {
+                //有边界
                 left = mBounds.left - (itemDividerWidth - dividerWidth) * indexHorizontal;
             } else {
                 left = mBounds.left - (dividerWidth - indexHorizontal * (dividerWidth - itemDividerWidth));
@@ -234,16 +250,10 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * 第一列
-     */
-    private boolean isFirstColumn(int position, int spanCount) {
-        return position % spanCount == 0;
-    }
-
-    /**
      * 最后一列
      */
     private boolean isLastColumn(int position, int spanCount, int itemCount) {
+        //每行最后一个或总item最后一个
         return ((position + 1) % spanCount == 0) || (position + 1 == itemCount);
     }
 
