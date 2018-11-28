@@ -70,7 +70,7 @@ public class GroupItemDecorationActivity extends Activity {
         int groupId = 0;
         int index = 0;
         View view = View.inflate(this, R.layout.layout_divider_head, null);
-        view.measure(0, 0);
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         int headHeight = view.getMeasuredHeight();
         int top = 0;
         List<GroupBean> groupBeanList = new ArrayList<>();
