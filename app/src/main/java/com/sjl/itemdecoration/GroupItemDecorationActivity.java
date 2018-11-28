@@ -38,6 +38,7 @@ public class GroupItemDecorationActivity extends Activity {
         GroupItemDecoration groupItemDecoration = new GroupItemDecoration(new GroupCallback() {
             @Override
             public GroupBean getGroupBean(int position) {
+                //列表范围内返回对象
                 if (position < groupBeanList.size()) {
                     return groupBeanList.get(position);
                 }
@@ -51,9 +52,10 @@ public class GroupItemDecorationActivity extends Activity {
                     return null;
                 }
                 View view;
+                //根据分组状态返回不同分割线
                 if (groupBean.isGroupHead()) {
                     view = View.inflate(GroupItemDecorationActivity.this, R.layout.layout_divider_head, null);
-                    ((TextView) view.findViewById(R.id.tv_name)).setText("G" + groupBean.getGroupId());
+                    ((TextView) view.findViewById(R.id.tv_name)).setText(groupBean.getTitle());
                 } else {
                     view = View.inflate(GroupItemDecorationActivity.this, R.layout.layout_divider, null);
                 }
@@ -68,10 +70,11 @@ public class GroupItemDecorationActivity extends Activity {
         int groupId = 0;
         int index = 0;
         View view = View.inflate(this, R.layout.layout_divider_head, null);
-        view.measure(0,0);
+        view.measure(0, 0);
         int headHeight = view.getMeasuredHeight();
         int top = 0;
         List<GroupBean> groupBeanList = new ArrayList<>();
+        GroupBean groupBean;
         for (int i = 0; i < list.size(); i++) {
             if (i % 3 == 0) {
                 groupId = i == 0 ? 0 : (groupId + 1);
@@ -81,7 +84,12 @@ public class GroupItemDecorationActivity extends Activity {
                 index++;
                 top = 1;
             }
-            groupBeanList.add(new GroupBean(groupId, index, top));
+            groupBean = new GroupBean();
+            groupBean.setGroupId(groupId);
+            groupBean.setIndex(index);
+            groupBean.setTop(top);
+            groupBean.setTitle("G" + groupId);
+            groupBeanList.add(groupBean);
         }
         return groupBeanList;
     }

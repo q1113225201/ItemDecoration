@@ -7,17 +7,17 @@ package com.sjl.itemdecoration.decoration.group;
  * @date 2018/11/27
  */
 public class GroupBean {
+    private String title;
     private int groupId;
     private int index;
     private int top;
 
-    public GroupBean() {
+    public String getTitle() {
+        return title;
     }
 
-    public GroupBean(int groupId, int index, int top) {
-        this.groupId = groupId;
-        this.index = index;
-        this.top = top;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getGroupId() {
