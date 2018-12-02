@@ -21,7 +21,7 @@ public class GridItemDecorationActivity extends Activity {
     }
 
     private void initView() {
-        int spanCount = 4;
+        int spanCount = 3;
         StringAdapter adapterW = new StringAdapter(R.layout.item_string_w,Util.buildList());
         RecyclerView recyclerViewGridBorderW = findViewById(R.id.recycler_view_grid_border_w);
         recyclerViewGridBorderW.setAdapter(adapterW);
