@@ -11,7 +11,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 /**
- * GridItemDecoration
+ * 网格分割
  *
  * @author 林zero
  * @date 2018/11/20

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * GroupItemDecoration
+ * 分组分割
  *
  * @author 沈建林
  * @date 2018/11/27
