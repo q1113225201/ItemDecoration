@@ -215,10 +215,12 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
             if (hasBorder) {
                 //有边界
                 left = mBounds.left - (itemDividerWidth - dividerWidth) * indexHorizontal;
+                right = left + dividerWidth;
             } else {
                 left = mBounds.left - (dividerWidth - indexHorizontal * (dividerWidth - itemDividerWidth));
+                //无边界且是第一列不绘制
+                right = left + (indexHorizontal == 0 ? 0 : dividerWidth);
             }
-            right = left + dividerWidth;
             //画左边纵向分割线
             mVerticalDivider.setBounds(left, top, right, bottom);
             mVerticalDivider.draw(canvas);
