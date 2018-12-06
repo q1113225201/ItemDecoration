@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".LinearItemDecorationActivity" />
         <activity android:name=".GridItemDecorationActivity" />
-        <activity android:name=".GroupItemDecorationActivity"></activity>
+        <activity android:name=".GroupItemDecorationActivity" />
+        <activity android:name=".OverItemDecorationActivity"></activity>
     </application>
 
 </manifest>

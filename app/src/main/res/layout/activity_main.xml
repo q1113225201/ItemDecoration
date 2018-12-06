@@ -19,5 +19,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="分组ItemDecoration" />
+    <Button
+        android:id="@+id/btn_draw_over"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="onDrawOver" />
 
 </LinearLayout>
