@@ -11,7 +11,7 @@ import com.sjl.itemdecoration.R;
 /**
  * 覆盖分割
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2018/12/6
  */
 public class OverItemDecoration extends RecyclerView.ItemDecoration {

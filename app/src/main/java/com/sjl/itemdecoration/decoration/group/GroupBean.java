@@ -3,7 +3,7 @@ package com.sjl.itemdecoration.decoration.group;
 /**
  * GroupBean
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2018/11/27
  */
 public class GroupBean {

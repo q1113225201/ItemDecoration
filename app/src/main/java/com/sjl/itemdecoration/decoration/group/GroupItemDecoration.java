@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 /**
  * 分组分割
  *
- * @author 沈建林
+ * @author 林zero
  * @date 2018/11/27
  */
 public class GroupItemDecoration extends RecyclerView.ItemDecoration {
