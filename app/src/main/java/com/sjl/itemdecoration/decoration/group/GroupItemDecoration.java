@@ -43,40 +43,36 @@ public class GroupItemDecoration extends RecyclerView.ItemDecoration {
         if (groupCallback == null) {
             return;
         }
+        //屏幕范围内item个数
         int childCount = parent.getChildCount();
-        int top;
-        int dividerHeight;
         int left = parent.getPaddingLeft();
         int right = parent.getWidth() - parent.getPaddingRight();
-        View childView;
-        GroupBean groupBean;
-        View dividerView;
-        ViewGroup.LayoutParams layoutParams;
         for (int i = 0; i < childCount; i++) {
-            childView = parent.getChildAt(i);
+            View childView = parent.getChildAt(i);
             int position = parent.getChildAdapterPosition(childView);
-            groupBean = groupCallback.getGroupBean(position);
+            GroupBean groupBean = groupCallback.getGroupBean(position);
             if (groupBean == null) {
                 continue;
             }
-            dividerView = groupCallback.getDividerView(position);
+            View dividerView = groupCallback.getDividerView(position);
             if(dividerView==null){
                 continue;
             }
             //分割线高度
-            dividerHeight = groupBean.getTop();
-            //绘制的上边位置
-            top = childView.getTop() + parent.getPaddingTop()-dividerHeight;
-
-            layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dividerHeight);
+            int dividerHeight = groupBean.getTop();
+            //分割线上边沿位置
+            int top = childView.getTop() + parent.getPaddingTop()-dividerHeight;
+            //计算设置每个获取到分割View的宽高
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dividerHeight);
             dividerView.setLayoutParams(layoutParams);
-            //必须加，否则可能出现获取到的bitmap为null
-            dividerView.setDrawingCacheEnabled(true);
             dividerView.measure(View.MeasureSpec.makeMeasureSpec(right, View.MeasureSpec.EXACTLY),
                     View.MeasureSpec.makeMeasureSpec(dividerHeight, View.MeasureSpec.EXACTLY));
             //布局大小
             dividerView.layout(0, 0, right, dividerHeight);
+            //必须加，否则可能出现获取到的bitmap为null
+            dividerView.setDrawingCacheEnabled(true);
             dividerView.buildDrawingCache();
+            //没有上面两句获取到的就是null
             Bitmap bitmap = dividerView.getDrawingCache();
             c.drawBitmap(bitmap, left, top, null);
         }

@@ -7,9 +7,21 @@ package com.sjl.itemdecoration.decoration.group;
  * @date 2018/11/27
  */
 public class GroupBean {
+    /**
+     * 组标题
+     */
     private String title;
+    /**
+     * 组id
+     */
     private int groupId;
+    /**
+     * 组内位置
+     */
     private int index;
+    /**
+     * 每个item上偏移
+     */
     private int top;
 
     public String getTitle() {
