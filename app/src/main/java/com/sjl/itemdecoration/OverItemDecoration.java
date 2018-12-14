@@ -1,12 +1,10 @@
-package com.sjl.itemdecoration.decoration;
+package com.sjl.itemdecoration;
 
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.sjl.itemdecoration.R;
 
 /**
  * 覆盖分割

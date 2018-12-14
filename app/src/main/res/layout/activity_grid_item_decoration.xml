@@ -9,12 +9,44 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:digits="1234567980"
+                android:hint="长度"
+                android:inputType="number"
+                android:text="10" />
+
+            <EditText
+                android:id="@+id/et_span_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:digits="1234567980"
+                android:hint="列数"
+                android:inputType="number"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/btn_build"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生成" />
+        </LinearLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_grid_border_w"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginTop="3dp"></android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="3dp"
+            android:padding="10dp"></android.support.v7.widget.RecyclerView>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_grid_no_border_w"

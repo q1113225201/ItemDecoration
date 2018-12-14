@@ -1,4 +1,4 @@
-package com.sjl.itemdecoration.decoration.group;
+package com.sjl.libdecoration.group;
 
 /**
  * GroupBean

@@ -1,4 +1,4 @@
-package com.sjl.itemdecoration.decoration;
+package com.sjl.libdecoration;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -145,10 +145,12 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
             left = mBounds.left;
             right = left + itemWidth;
             //每个item下边分割线上边沿（getItemOffsets时每个item多空了一个分割线高度的一半）
-            top = mBounds.bottom - dividerHeight / 2;
+            top = mBounds.bottom;
             if (isLastRow(position, itemCount, spanCount)) {
                 //最后一行，有边界需要完整分割线高度，没边界减掉
-                top += hasBorder ? -dividerHeight / 2 : dividerHeight / 2;
+                top += hasBorder ? -dividerHeight : 0;
+            }else{
+                top -= dividerHeight / 2;
             }
             if (position >= itemCount - spanCount && !hasBorder) {
                 //最后几个，且没有边框

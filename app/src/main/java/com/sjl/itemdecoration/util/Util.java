@@ -13,7 +13,14 @@ public class Util {
 
     public static List<String> buildList() {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
+            list.add("item" + i);
+        }
+        return list;
+    }
+    public static List<String> buildList(int size) {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
             list.add("item" + i);
         }
         return list;

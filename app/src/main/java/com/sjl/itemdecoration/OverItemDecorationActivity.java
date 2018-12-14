@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.sjl.itemdecoration.adapter.StringAdapter;
-import com.sjl.itemdecoration.decoration.OverItemDecoration;
 import com.sjl.itemdecoration.util.Util;
 
 public class OverItemDecorationActivity extends Activity {

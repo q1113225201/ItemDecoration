@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sjl.itemdecoration.adapter.StringAdapter;
-import com.sjl.itemdecoration.decoration.group.GroupBean;
-import com.sjl.itemdecoration.decoration.group.GroupCallback;
-import com.sjl.itemdecoration.decoration.group.GroupItemDecoration;
 import com.sjl.itemdecoration.util.Util;
+import com.sjl.libdecoration.group.GroupBean;
+import com.sjl.libdecoration.group.GroupCallback;
+import com.sjl.libdecoration.GroupItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
