@@ -28,7 +28,7 @@ public class GroupItemDecorationActivity extends Activity {
 
     private void initAdapter() {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        List<String> list = Util.buildList();
+        List<String> list = Util.buildList(10);
         StringAdapter adapter = new StringAdapter(R.layout.item_string_m, list);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
